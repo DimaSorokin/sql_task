@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Июн 04 2019 г., 20:09
+-- Время создания: Июн 04 1619 г., 16:09
 -- Версия сервера: 5.7.26-0ubuntu0.18.04.1
 -- Версия PHP: 7.2.17-0ubuntu0.18.04.1
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY,
   `name` varchar(255) NOT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -37,21 +37,21 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `parent_id`) VALUES
-(1, 'Фильмы', 17),
-(2, 'Мультф', 18),
-(3, 'Комедия', 20),
-(4, 'Драма', 20),
-(5, 'Фэнтези', 20),
-(6, 'Боевик', 20),
-(7, 'Триллер', 20),
+(1, 'Фильмы', 6),
+(2, 'Мультф', 5),
+(3, 'Комедия', 16),
+(4, 'Драма', 16),
+(5, 'Фэнтези', 16),
+(6, 'Боевик', 16),
+(7, 'Триллер', 16),
 (8, 'Детский', 2),
-(9, 'Семейное', 22),
-(10, 'Фантастика', 20),
-(11, 'Драма', 22),
-(12, 'Фантастика', 22),
-(13, 'Музика', 0),
-(14, 'Видео', 0),
-(15, 'Наши', 2),
+(9, 'Семейное', 14),
+(10, 'Фантастика', 16),
+(11, 'Драма', 14),
+(12, 'Фантастика', 14),
+(13, 'Музика', 1),
+(14, 'Видео', 1),
+(15, 'Наші', 2),
 (16, 'Зарубежные', 2);
 
 -- --------------------------------------------------------
@@ -106,7 +106,7 @@ INSERT INTO `product_to_categories` (`product_id`, `categ_id`) VALUES
 (5, 14),
 (5, 6),
 (4, 5),
-(4, 0),
+(4, 1),
 (3, 14),
 (3, 7),
 (3, 4),
@@ -129,7 +129,7 @@ INSERT INTO `product_to_categories` (`product_id`, `categ_id`) VALUES
 (11, 10),
 (11, 11),
 (11, 15),
-(11, 0);
+(11, 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -138,8 +138,8 @@ INSERT INTO `product_to_categories` (`product_id`, `categ_id`) VALUES
 --
 -- Индексы таблицы `categories`
 --
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `categories`
+--   ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `products`
@@ -155,9 +155,17 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+
+
+ALTER TABLE `categories`
+ADD CONSTRAINT FK_cat
+FOREIGN KEY (`parent_id`) REFERENCES `categories`(`id`)
+
+
